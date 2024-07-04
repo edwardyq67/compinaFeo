@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import CountUp from 'react-countup';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { InlineWidget } from "react-calendly";
-
+import emailjs from '@emailjs/browser';
 import 'leaflet/dist/leaflet.css';
 
 import logo from './images/icon/Logo_Compina.png';
@@ -69,6 +69,7 @@ import './index.css'
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper/modules';
 import './App.css'
 const GoogleMapEmbed = () => {
+
   return (
     <section>
       <iframe
@@ -84,53 +85,108 @@ const GoogleMapEmbed = () => {
   );
 };
 function App() {
-  const [count, setCount] = useState(0)
+  const [mensajeEnviado, setMensajeEnviado] = useState(null);
+  const [sale, setSale] = useState(false);
+  const form = useRef(null);
+  const ref = form.current
+  const sendEmail = (event) => {
+    event.preventDefault();
+    const serviceId = "service_0j5p4is";
+    const templateId = "template_c2csmmu";
+    const apikey = "FiOIebaYfaTGEnXXt";
 
+    if (ref) {
+      emailjs.sendForm(serviceId, templateId, ref, apikey)
+        .then((result) => {
+          console.log(result.text);
+          setMensajeEnviado("Mensaje enviado exitosamente");
+        })
+        .catch(error => console.log(error.message));
+    }
+  }
   return (
     <div  >
       <nav className='fixed z-50 w-full'>
-<div className='bg-mysin-400'>
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4">
-          <span className='flex'>
-            <h5 >(511) 7804649 - (51) 946570562 - </h5><a href="info@compina.net">info@compina.net</a>
-          </span>
-        </div>
-      </div>
+        <div className='relative z-50'>
+          <div className='bg-mysin-400'>
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4">
+              <span className='flex'>
+                <h5 >(511) 7804649 - (51) 946570562 - </h5><a href="info@compina.net">info@compina.net</a>
+              </span>
+            </div>
+          </div>
 
-      <div className='bg-black '>
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src={logo} className="h-8" alt="Flowbite Logo" />
-        </a>
-          <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-            </svg>
-          </button>
-          <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-              <li>
-                <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</a>
-              </li>
-              <li>
-                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
-              </li>
-              <li>
-                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
-              </li>
-              <li>
-                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
-              </li>
-              <li>
-                <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-              </li>
-            </ul>
+          <div className='bg-black '>
+            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+              <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src={logo} className="h-8" alt="Flowbite Logo" />
+              </a>
+              <button
+                data-collapse-toggle="navbar-sticky"
+                type="button"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-sticky"
+                aria-expanded={sale}
+                onClick={() => setSale(!sale)}
+              >
+                <span className="sr-only">Open main menu</span>
+                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+              </button>
+              <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-light flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-black">
+                  <li>
+                    <a href="#seccion1" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400" >WE</a>
+                  </li>
+                  <li>
+                    <a href="#seccion2" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">SERVICES</a>
+                  </li>
+                  <li>
+                    <a href="#seccion3" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">PROJECTS</a>
+                  </li>
+                  <li>
+                    <a href="#seccion4" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">CUSTOMERS</a>
+                  </li>
+                  <li>
+                    <a href="#seccion5" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">LOCATE US</a>
+                  </li>
+                  <li>
+                    <a href="#seccion6" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">CONTACT US</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+
+        <div
+          className={`z-20 absolute inset-x-0 transition-transform rounded-b-lg duration-300 ease-in-out ${sale ? 'translate-y-0' : '-translate-y-full'} mt-0 md:hidden container mx-auto bg-black grid z-30`}
+          id="navbar-sticky"
+        >
+          <ul className="flex bg-black flex-col p-4 md:p-0 font-medium rounded-b-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-center">
+            <li>
+              <a href="#seccion1" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400" aria-current="page">WE</a>
+            </li>
+            <li>
+              <a href="#seccion2" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">SERVICES</a>
+            </li>
+            <li>
+              <a href="#seccion3" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">PROJECTS</a>
+            </li>
+            <li>
+              <a href="#seccion4" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">CUSTOMERS</a>
+            </li>
+            <li>
+              <a href="#seccion5" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">LOCATE US</a>
+            </li>
+            <li>
+              <a href="#seccion6" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">CONTACT US</a>
+            </li>
+          </ul>
+        </div>
       </nav>
-      
+
       <main>
         <section className='pt-20'>
           <div >
@@ -211,7 +267,7 @@ function App() {
           </section>
 
         </section>
-        <section className='py-5 md:py-10' >
+        <section id='seccion1' className='py-5 md:py-10' >
           <div class=" grid grid-cols-2 max-w-screen-xl gap-5  flex-wrap items-center justify-between mx-auto px-4">
             <header className='col-span-2 text-center text-3xl font-semibold'><h2 className='text-2xl md:text-3xl lg:text-4xl  font-semibold'>WE</h2></header>
             <article className='col-span-2 lg:col-span-1 gap-4 grid text-center font-light text-base'>
@@ -296,47 +352,47 @@ function App() {
             </article>
           </div>
         </section>
-        <section className='grid gap-5 py-5 md:py-10 '>
+        <section className='grid gap-5 py-5 md:py-10 ' id='seccion2'>
           <h2 className='text-center text-2xl md:text-3xl lg:text-4xl  font-semibold'>SERVICES</h2>
           <p class="max-w-screen-md text-center flex flex-wrap items-center font-light text-base justify-between mx-auto px-4">Our services are based on being strategic, coordinated and integrated based on your needs and efforts to be sustainable, being our main goal the corporate growth and brand recognition of our customers. </p>
           <div className='grid grid-cols-4 gap-x-5 gap-y-3 px-5 '>
-            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 md:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
+            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 sm:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
               <img src={servicesImg1} alt="" className="w-full" />
               <p className="text-center flex items-center">
                 Sustainable branding, communication and marketing, based on circular strategies
               </p>
             </span>
-            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 md:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
+            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 sm:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
               <img src={servicesImg2} alt="" />
               <p className='text-center '>Strategic alliance commercial, logistical and marketing support</p>
             </span>
-            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 md:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
+            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 sm:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
               <img src={servicesImg3} alt="" />
               <p className='text-center'>Sustainable management with social impact</p>
             </span>
-            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 md:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
+            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 sm:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
               <img src={servicesImg4} alt="" />
               <p className='text-center'>Sustainable tourism and development of native communities</p>
             </span>
-            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 md:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
+            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 sm:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
               <img src={servicesImg5} alt="" />
               <p className='text-center'>Investment opportunity in real estate and energy efficient projects</p>
             </span>
-            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 md:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
+            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 sm:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
               <img src={servicesImg6} alt="" />
               <p className='text-center'>Training and consulting in renewable energies and circular economy</p>
             </span>
-            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 md:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
+            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 sm:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
               <img src={servicesImg7} alt="" />
               <p className='text-center'>Collaborative platform for the development of projects in energy and circular economy</p>
             </span>
-            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 md:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
+            <span className="col-span-4 bg-white hover:bg-[#707070] hover:text-white cursor-pointer transition-all duration-200 sm:col-span-2 font-light text-base lg:col-span-1 grid transform hover:scale-105 pb-1">
               <img src={servicesImg8} alt="" />
               <p className='text-center'>Eco-sustainable Advertising & Merchandising Solutions</p>
             </span>
           </div>
         </section>
-        <section className='py-5 md:py-10 '>
+        <section className='py-5 md:py-10 ' id='seccion3'>
 
           <h2 className='text-2xl md:text-3xl lg:text-4xl  font-semibold text-center mb-5'>PROJECTS</h2>
           <div >
@@ -409,7 +465,7 @@ function App() {
           </div>
         </section>
 
-        <section className='bg-[#E7E8EB]'>
+        <section className='bg-[#E7E8EB]' id='seccion4'>
           <div className=' py-5 md:py-10 max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 '>
             <h2 className='w-full mb-5 py-2 text-2xl md:text-3xl lg:text-4xl  font-semibold text-center'>CUSTOMERS</h2>
             <div className="w-full px-6 hidden lg:block ">
@@ -503,6 +559,7 @@ function App() {
           </div>
         </section>
         <section
+          id='seccion6'
           className='relative'
           style={{
             backgroundImage: `url(${brochure})`,
@@ -512,19 +569,20 @@ function App() {
           }}
         >
 
-          <div className="grid grid-cols-2  justify-around mx-auto py-4">
+          <div className="grid grid-cols-2 justify-around mx-auto py-4">
             <div className="col-span-2 lg:col-span-1">
               <h2 className="w-full py-2 text-2xl md:text-3xl lg:text-4xl font-semibold text-center text-white">
                 TOGETHER TOWARDS A SUSTAINABLE FUTURE: <br /> BECOME OUR STRATEGIC PARTNER
               </h2>
-            </div>
-            <form className="col-span-2 lg:col-span-1 px-2 grid max-w-[700px] ">
-              <h2 className="w-full py-2 text-2xl md:text-3xl mb-4 lg:text-4xl font-semibold text-center text-mysin-400">
+            </div >
+            <form ref={form} onSubmit={sendEmail} className="col-span-2 lg:col-span-1 px-2 grid max-w-[700px] mx-auto min-w-[70%]">
+              <h2 className="w-full py-2 text-2xl md:text-3xl mb-4 lg:text-4xl font-semibold text-center text-mysin-400 ">
                 CONTACT US
               </h2>
               <input
                 type="text"
                 id="disabled-input"
+                name='name'
                 aria-label="disabled input"
                 className="mb-5 bg-gray-100 border border-gray-300 text-gray-400 text-sm rounded-lg focus:outline-none block w-full p-2.5 "
                 placeholder='Write your name'
@@ -534,12 +592,14 @@ function App() {
                 type="text"
                 id="disabled-input"
                 aria-label="disabled input"
+                name='business'
                 className="mb-5 bg-gray-100 border border-gray-300 text-gray-400 text-sm rounded-lg focus:outline-none block w-full p-2.5 "
                 placeholder='Your business or enterprise'
               />
               <input
                 type="email"
                 id="disabled-input"
+                name='email'
                 aria-label="disabled input"
                 className="mb-5 bg-gray-100 border border-gray-300 text-gray-400 text-sm rounded-lg focus:outline-none block w-full p-2.5 "
                 placeholder='Write your e-mail address'
@@ -549,62 +609,63 @@ function App() {
                 type="text"
                 id="disabled-input"
                 aria-label="disabled input"
+                name='phone'
                 className="mb-5 bg-gray-100 border border-gray-300 text-gray-400 text-sm rounded-lg focus:outline-none block w-full p-2.5 "
                 placeholder='Write your mobile phone'
               />
-              <textarea id="message" rows="4" className="mb-5 bg-gray-100 border border-gray-300 text-gray-400 text-sm rounded-lg focus:outline-none block w-full p-2.5 " placeholder="Leave a comment..."></textarea>
+              <textarea name='area' id="message" rows="4" className="mb-5 bg-gray-100 border border-gray-300 text-gray-400 text-sm rounded-lg focus:outline-none block w-full p-2.5 " placeholder="Leave a comment..."></textarea>
               <div className="flex justify-end">
-                <button className='bg-mysin-400 py-1 px-5 transition-all duration-150 hover:bg-mysin-500  text-white rounded-md font-semibold cursor-pointer'>send</button>
+                <button type='submit' className='bg-mysin-400 py-1 px-5 transition-all duration-150 hover:bg-mysin-500  text-white rounded-md font-semibold cursor-pointer'>send</button>
               </div>
-
+              {mensajeEnviado && <p>{mensajeEnviado}</p>}
             </form>
           </div>
         </section>
-        <section className='pt-5 md:pt-10' >
-        <h2 className='w-full py-2 text-xl md:text-2xl lg:text-3xl  font-semibold text-start px-2'>Av. Rivera Navarrete N°475, San Isidro 15046</h2>
+        <section className='pt-5 md:pt-10' id='seccion5' >
+          <h2 className='w-full py-2 text-xl md:text-2xl lg:text-3xl  font-semibold text-start px-2'>Av. Rivera Navarrete N°475, San Isidro 15046</h2>
           <GoogleMapEmbed />
         </section>
         <section className='bg-[#2C353F]'>
-        <div class="max-w-screen-xl grid grid-cols-4 mx-auto p-4 text-center text-white">
-          <span className='grid gap-1 col-span-2 md:col-span-1'>
-          <i class="fa-solid fa-location-dot text-[#32B6E6] text-xl lg:text-2xl"></i>
-          <h5 className='font-bold text-base'>Find us on</h5>
-          <h6 className='font-light text-base'>Av. Rivera Navarrete 475
-          San Isidro</h6>
-          </span>
-          <span className='grid gap-1 col-span-2 md:col-span-1'>
-          <i class="fa-solid fa-mobile-screen-button text-[#32B6E6] text-xl lg:text-2xl"></i>
-          <h5 className='font-bold text-base'>Contact us</h5>
-          <h6 className='font-light text-base'>(511) 7804649 - (511) 7926135</h6>
-          </span>
-          <span className='grid gap-1 col-span-2 md:col-span-1'>
-          <i class="fa-solid fa-envelope text-[#32B6E6] text-xl lg:text-2xl"></i>
-          <h5 className='font-bold text-base'>Write to</h5>
-          <a className='font-light text-base'>marketing@compina.net</a>
-          </span>
-          <span className='grid gap-1 col-span-2 md:col-span-1'>
-          <i class="fa-regular fa-clock text-[#32B6E6] text-xl lg:text-2xl"></i>
-          <h5 className='font-bold text-base'>Timetable</h5>
-          <h6 className='font-light text-base'>Monday to Friday <br />
-          9:00 am - 6:00 pm  </h6>
-          </span>
-        </div>
+          <div class="max-w-screen-xl grid grid-cols-4 mx-auto p-4 text-center text-white">
+            <span className='grid gap-1 col-span-2 md:col-span-1'>
+              <i class="fa-solid fa-location-dot text-[#32B6E6] text-xl lg:text-2xl"></i>
+              <h5 className='font-bold text-base'>Find us on</h5>
+              <h6 className='font-light text-base'>Av. Rivera Navarrete 475
+                San Isidro</h6>
+            </span>
+            <span className='grid gap-1 col-span-2 md:col-span-1'>
+              <i class="fa-solid fa-mobile-screen-button text-[#32B6E6] text-xl lg:text-2xl"></i>
+              <h5 className='font-bold text-base'>Contact us</h5>
+              <h6 className='font-light text-base'>(511) 7804649 - (511) 7926135</h6>
+            </span>
+            <span className='grid gap-1 col-span-2 md:col-span-1'>
+              <i class="fa-solid fa-envelope text-[#32B6E6] text-xl lg:text-2xl"></i>
+              <h5 className='font-bold text-base'>Write to</h5>
+              <a className='font-light text-base'>marketing@compina.net</a>
+            </span>
+            <span className='grid gap-1 col-span-2 md:col-span-1'>
+              <i class="fa-regular fa-clock text-[#32B6E6] text-xl lg:text-2xl"></i>
+              <h5 className='font-bold text-base'>Timetable</h5>
+              <h6 className='font-light text-base'>Monday to Friday <br />
+                9:00 am - 6:00 pm  </h6>
+            </span>
+          </div>
         </section>
       </main>
-  
 
-<footer class="bg-black ">
-    <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
-        <div class="sm:flex sm:items-center sm:justify-between">
-        <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src={logo} className="h-8" alt="Flowbite Logo" />
-        </a>
+
+      <footer class="bg-black ">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+          <div class="sm:flex sm:items-center sm:justify-between">
+            <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
+              <img src={logo} className="h-8" alt="Flowbite Logo" />
+            </a>
             <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Copyright CÓMPINA</a>
-    </span>
+            </span>
+          </div>
+
         </div>
-       
-    </div>
-</footer>
+      </footer>
 
 
     </div>
