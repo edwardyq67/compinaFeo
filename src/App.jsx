@@ -281,11 +281,8 @@ function App() {
           <section>
             <div class="inset-x-0 relative  w-full grid grid-cols-4">
               <a href="#seccion6" onClick={(e) => handleScroll(e, section6Ref)} className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-mysin-400 text-white'><i class="fa-solid fa-envelope text-2xl"></i><h3 className='px-2'>CONTACT US</h3></a>
-              <a href="/src/document/presentacion.pdf" download className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-black text-white'>
-  <i class="fa-solid fa-file-pdf text-2xl"></i>
-  <h3 className='px-2'>VIEW PRESENTATION</h3>
-</a>
-<a href="https://drive.google.com/file/d/1s-JXLy742UkFwflpYRUgGJxDGTLe-qHM/view?usp=drive_link" download className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-black text-white'>
+
+<a href="https://drive.google.com/file/d/1s-JXLy742UkFwflpYRUgGJxDGTLe-qHM/view?usp=drive_link" target="_blank" rel="noopener noreferrer" className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-black text-white'>
   <i class="fa-solid fa-file-pdf text-2xl"></i>
   <h3 className='px-2'>VIEW PRESENTATION</h3>
 </a>
