@@ -281,7 +281,7 @@ function App() {
           <section>
             <div class="inset-x-0 relative  w-full grid grid-cols-4">
               <a href="#seccion6" onClick={(e) => handleScroll(e, section6Ref)} className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-mysin-400 text-white'><i class="fa-solid fa-envelope text-2xl"></i><h3 className='px-2'>CONTACT US</h3></a>
-              <a href='../public/presentacion.pdf'
+              <a href='./document/presentacion.pdf'
                 download className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-black text-white'><i class="fa-solid fa-file-pdf text-2xl"></i><h3 className='px-2'>VIEW PRESENTATION</h3></a>
               <a href='#seccion7' onClick={(e) => handleScroll(e, section7Ref)} className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-mysin-400 text-white'><i class="fa-solid fa-building text-2xl"></i><h3 className='px-2'>OUR BRANDS</h3></a>
               <a href='#seccion4' onClick={(e) => handleScroll(e, section4Ref)} className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-black text-white'><i class="fa-solid fa-users text-2xl"></i><h3 className='px-2'>CUSTOMERS</h3></a>
