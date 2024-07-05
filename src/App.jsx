@@ -104,14 +104,35 @@ function App() {
         .catch(error => console.log(error.message));
     }
   }
+  const section1Ref = useRef(null);
+  const section2Ref = useRef(null);
+  const section3Ref = useRef(null);
+  const section4Ref = useRef(null);
+  const section5Ref = useRef(null);
+  const section6Ref = useRef(null);
+  const section7Ref = useRef(null);
+
+  const handleScroll = (e, ref) => {
+    e.preventDefault();
+    const offset = 100; // Ajusta este valor según sea necesario
+
+    const elementPosition = ref.current.getBoundingClientRect().top;
+    const offsetPosition = elementPosition - offset + window.scrollY;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    });
+  };
   return (
     <div  >
       <nav className='fixed z-50 w-full'>
         <div className='relative z-50'>
           <div className='bg-mysin-400'>
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4">
-              <span className='flex'>
-                <h5 >(511) 7804649 - (51) 946570562 - </h5><a href="info@compina.net">info@compina.net</a>
+              <span className='grid sm:flex gap-0 sm:gap-2 text-sm text-gray-500'>
+
+                <h5 >(511) 7804649 - (51) 946570562</h5><a href="mailto:info@compina.net" className='transition-all duration-200 hover:text-blue-600'> info@compina.net</a>
               </span>
             </div>
           </div>
@@ -135,24 +156,24 @@ function App() {
                 </svg>
               </button>
               <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul class="font-light flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-black">
-                  <li>
-                    <a href="#seccion1" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400" >WE</a>
+                <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg text-xs md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-black">
+                  <li onClick={(e) => handleScroll(e, section1Ref)}>
+                    <a href="#seccion1" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">WE</a>
                   </li>
-                  <li>
-                    <a href="#seccion2" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">SERVICES</a>
+                  <li onClick={(e) => handleScroll(e, section2Ref)}>
+                    <a href="#seccion2" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">SERVICES</a>
                   </li>
-                  <li>
-                    <a href="#seccion3" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">PROJECTS</a>
+                  <li onClick={(e) => handleScroll(e, section3Ref)}>
+                    <a href="#seccion3" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">PROJECTS</a>
                   </li>
-                  <li>
-                    <a href="#seccion4" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">CUSTOMERS</a>
+                  <li onClick={(e) => handleScroll(e, section4Ref)}>
+                    <a href="#seccion4" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">CUSTOMERS</a>
                   </li>
-                  <li>
-                    <a href="#seccion5" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">LOCATE US</a>
+                  <li onClick={(e) => handleScroll(e, section5Ref)}>
+                    <a href="#seccion5" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">LOCATE US</a>
                   </li>
-                  <li>
-                    <a href="#seccion6" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">CONTACT US</a>
+                  <li onClick={(e) => handleScroll(e, section6Ref)}>
+                    <a href="#seccion6" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">CONTACT US</a>
                   </li>
                 </ul>
               </div>
@@ -164,24 +185,24 @@ function App() {
           className={`z-20 absolute inset-x-0 transition-transform rounded-b-lg duration-300 ease-in-out ${sale ? 'translate-y-0' : '-translate-y-full'} mt-0 md:hidden container mx-auto bg-black grid z-30`}
           id="navbar-sticky"
         >
-          <ul className="flex bg-black flex-col p-4 md:p-0 font-medium rounded-b-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 text-center">
-            <li>
-              <a href="#seccion1" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400" aria-current="page">WE</a>
+          <ul className="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg text-xs md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 bg-black">
+            <li onClick={(e) => handleScroll(e, section1Ref)}>
+              <a href="#seccion1" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">WE</a>
             </li>
-            <li>
-              <a href="#seccion2" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">SERVICES</a>
+            <li onClick={(e) => handleScroll(e, section2Ref)}>
+              <a href="#seccion2" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">SERVICES</a>
             </li>
-            <li>
-              <a href="#seccion3" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">PROJECTS</a>
+            <li onClick={(e) => handleScroll(e, section3Ref)}>
+              <a href="#seccion3" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">PROJECTS</a>
             </li>
-            <li>
-              <a href="#seccion4" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">CUSTOMERS</a>
+            <li onClick={(e) => handleScroll(e, section4Ref)}>
+              <a href="#seccion4" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">CUSTOMERS</a>
             </li>
-            <li>
-              <a href="#seccion5" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">LOCATE US</a>
+            <li onClick={(e) => handleScroll(e, section5Ref)}>
+              <a href="#seccion5" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">LOCATE US</a>
             </li>
-            <li>
-              <a href="#seccion6" className="block py-2 px-3 text-white rounded md:bg-transparent  md:p-0 transition-all duration-200 hover:text-mysin-400">CONTACT US</a>
+            <li onClick={(e) => handleScroll(e, section6Ref)}>
+              <a href="#seccion6" className="block py-2 px-3 text-white rounded md:bg-transparent md:p-0 transition-all duration-200 hover:text-mysin-400">CONTACT US</a>
             </li>
           </ul>
         </div>
@@ -259,15 +280,16 @@ function App() {
           </div>
           <section>
             <div class="inset-x-0 relative  w-full grid grid-cols-4">
-              <section className='h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-mysin-400 text-white'><i class="fa-solid fa-envelope text-2xl"></i><h3 className='px-2'>CONTACT US</h3></section>
-              <section className='h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-black text-white'><i class="fa-solid fa-file-pdf text-2xl"></i><h3 className='px-2'>VIEW PRESENTATION</h3></section>
-              <section className='h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-mysin-400 text-white'><i class="fa-solid fa-building text-2xl"></i><h3 className='px-2'>OUR BRANDS</h3></section>
-              <section className='h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-black text-white'><i class="fa-solid fa-users text-2xl"></i><h3 className='px-2'>CUSTOMERS</h3></section>
+              <a href="#seccion6" onClick={(e) => handleScroll(e, section6Ref)} className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-mysin-400 text-white'><i class="fa-solid fa-envelope text-2xl"></i><h3 className='px-2'>CONTACT US</h3></a>
+              <a href='../public/presentacion.pdf'
+                download className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-black text-white'><i class="fa-solid fa-file-pdf text-2xl"></i><h3 className='px-2'>VIEW PRESENTATION</h3></a>
+              <a href='#seccion7' onClick={(e) => handleScroll(e, section7Ref)} className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-mysin-400 text-white'><i class="fa-solid fa-building text-2xl"></i><h3 className='px-2'>OUR BRANDS</h3></a>
+              <a href='#seccion4' onClick={(e) => handleScroll(e, section4Ref)} className='cursor-pointer h-[80px] py-4 col-span-4 md:col-span-2 lg:col-span-1 flex justify-center items-center bg-black text-white'><i class="fa-solid fa-users text-2xl"></i><h3 className='px-2'>CUSTOMERS</h3></a>
             </div>
           </section>
 
         </section>
-        <section id='seccion1' className='py-5 md:py-10' >
+        <section id='seccion1' className='py-5 md:py-10' ref={section1Ref}>
           <div class=" grid grid-cols-2 max-w-screen-xl gap-5  flex-wrap items-center justify-between mx-auto px-4">
             <header className='col-span-2 text-center text-3xl font-semibold'><h2 className='text-2xl md:text-3xl lg:text-4xl  font-semibold'>WE</h2></header>
             <article className='col-span-2 lg:col-span-1 gap-4 grid text-center font-light text-base'>
@@ -277,7 +299,7 @@ function App() {
               </p>
             </article>
             <article className='col-span-2 lg:col-span-1 mx-auto'>
-              <img src={we} alt="" />
+              <img className='rounded' src={we} alt="" />
             </article>
           </div>
         </section>
@@ -352,7 +374,7 @@ function App() {
             </article>
           </div>
         </section>
-        <section className='grid gap-5 py-5 md:py-10 ' id='seccion2'>
+        <section className='grid gap-5 py-5 md:py-10 ' id='seccion2' ref={section2Ref}>
           <h2 className='text-center text-2xl md:text-3xl lg:text-4xl  font-semibold'>SERVICES</h2>
           <p class="max-w-screen-md text-center flex flex-wrap items-center font-light text-base justify-between mx-auto px-4">Our services are based on being strategic, coordinated and integrated based on your needs and efforts to be sustainable, being our main goal the corporate growth and brand recognition of our customers. </p>
           <div className='grid grid-cols-4 gap-x-5 gap-y-3 px-5 '>
@@ -392,7 +414,7 @@ function App() {
             </span>
           </div>
         </section>
-        <section className='py-5 md:py-10 ' id='seccion3'>
+        <section className='py-5 md:py-10 ' id='seccion3' ref={section3Ref} >
 
           <h2 className='text-2xl md:text-3xl lg:text-4xl  font-semibold text-center mb-5'>PROJECTS</h2>
           <div >
@@ -452,20 +474,25 @@ function App() {
 
           </div>
         </section>
-        <section className='relative '>
-          <div  >
-            <img className='min-h-[643px] w-full h-full object-cover' src={agenda} alt="" />
-          </div>
+        <section className='relative '
+          style={{
+            backgroundImage: `url(${agenda})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+          }}
+        >
 
-          <div className="absolute inset-0 px-2 ">
-            <h2 className='py-2 text-2xl md:text-3xl lg:text-4xl  font-semibold text-center'>SCHEDULE YOUR MEETING</h2>
+          <div className="px-2 relative"
+          >
+            <h2 className='pt-2 text-2xl md:text-3xl lg:text-4xl  font-semibold text-center'>SCHEDULE YOUR MEETING</h2>
             <InlineWidget url="https://calendly.com/eddi-compina/30min"
-              styles={{ height: '700px', width: '100%' }}
+              styles={{ height: '700px', width: '100%', paddingBottom: "10px" }}
             />
           </div>
         </section>
 
-        <section className='bg-[#E7E8EB]' id='seccion4'>
+        <section className='bg-[#E7E8EB]' id='seccion4' ref={section4Ref}>
           <div className=' py-5 md:py-10 max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 '>
             <h2 className='w-full mb-5 py-2 text-2xl md:text-3xl lg:text-4xl  font-semibold text-center'>CUSTOMERS</h2>
             <div className="w-full px-6 hidden lg:block ">
@@ -542,18 +569,18 @@ function App() {
           </div>
 
         </section>
-        <section className='bg-white' >
+        <section className='bg-white py-5' id='seccion7' ref={section7Ref}>
           <div className='max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4'>
             <h2 className='w-full py-2 text-2xl md:text-3xl lg:text-4xl  font-semibold text-center'>OUR BRANDS</h2>
             <div className="grid grid-cols-3 justify-center gap-2 mx-auto items-center">
               <div className="col-span-3  md:col-span-1 ">
-                <img className='max-h-[250px] ' src={agua} alt="" />
+                <img className='h-[10em] md:h-[15em] mx-auto ' src={agua} alt="" />
               </div>
               <div className="col-span-3  md:col-span-1 ">
-                <img className='max-h-[250px] ' src={causacircular} alt="" />
+                <img className='h-[10em] md:h-[15em] mx-auto ' src={causacircular} alt="" />
               </div>
               <div className="col-span-3  md:col-span-1 ">
-                <img className='max-h-[250px] ' src={compipro} alt="" />
+                <img className=' h-[10em] md:h-[15em] mx-auto ' src={compipro} alt="" />
               </div>
             </div>
           </div>
@@ -561,6 +588,7 @@ function App() {
         <section
           id='seccion6'
           className='relative'
+          ref={section6Ref}
           style={{
             backgroundImage: `url(${brochure})`,
             backgroundSize: 'cover',
@@ -575,7 +603,7 @@ function App() {
                 TOGETHER TOWARDS A SUSTAINABLE FUTURE: <br /> BECOME OUR STRATEGIC PARTNER
               </h2>
             </div >
-            <form ref={form} onSubmit={sendEmail} className="col-span-2 lg:col-span-1 px-2 grid max-w-[700px] mx-auto min-w-[70%]">
+            <form ref={form} onSubmit={sendEmail} className="col-span-2 lg:col-span-1 px-2 grid mx-auto min-w-[70%]">
               <h2 className="w-full py-2 text-2xl md:text-3xl mb-4 lg:text-4xl font-semibold text-center text-mysin-400 ">
                 CONTACT US
               </h2>
@@ -621,13 +649,13 @@ function App() {
             </form>
           </div>
         </section>
-        <section className='pt-5 md:pt-10' id='seccion5' >
+        <section className='pt-5 md:pt-10' id='seccion5' ref={section5Ref}>
           <h2 className='w-full py-2 text-xl md:text-2xl lg:text-3xl  font-semibold text-start px-2'>Av. Rivera Navarrete N°475, San Isidro 15046</h2>
           <GoogleMapEmbed />
         </section>
         <section className='bg-[#2C353F]'>
-          <div class="max-w-screen-xl grid grid-cols-4 mx-auto p-4 text-center text-white">
-            <span className='grid gap-1 col-span-2 md:col-span-1'>
+          <div class="max-w-screen-xl grid grid-cols-4 mx-auto p-4 text-center text-white gap-x-8 gap-y-4">
+            <span className='grid gap-1 col-span-2 md:col-span-1 '>
               <i class="fa-solid fa-location-dot text-[#32B6E6] text-xl lg:text-2xl"></i>
               <h5 className='font-bold text-base'>Find us on</h5>
               <h6 className='font-light text-base'>Av. Rivera Navarrete 475
@@ -641,7 +669,7 @@ function App() {
             <span className='grid gap-1 col-span-2 md:col-span-1'>
               <i class="fa-solid fa-envelope text-[#32B6E6] text-xl lg:text-2xl"></i>
               <h5 className='font-bold text-base'>Write to</h5>
-              <a className='font-light text-base'>marketing@compina.net</a>
+              <a href='mailto:info@compina.net' className='font-light text-base'>marketing@compina.net</a>
             </span>
             <span className='grid gap-1 col-span-2 md:col-span-1'>
               <i class="fa-regular fa-clock text-[#32B6E6] text-xl lg:text-2xl"></i>
@@ -657,10 +685,10 @@ function App() {
       <footer class="bg-black ">
         <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8">
           <div class="sm:flex sm:items-center sm:justify-between">
-            <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="mailto:info@compina.net" className="flex items-center space-x-3 rtl:space-x-reverse">
               <img src={logo} className="h-8" alt="Flowbite Logo" />
             </a>
-            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline">Copyright CÓMPINA</a>
+            <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="mailto:info@compina.net" class="hover:underline">Copyright CÓMPINA</a>
             </span>
           </div>
 
